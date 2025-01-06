@@ -1,1 +1,1 @@
-web: gunicorn your_project_name.wsgi
+web: gunicorn dream_vacation_project.wsgi
