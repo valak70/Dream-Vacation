@@ -138,3 +138,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+
+CSRF_TRUSTED_ORIGINS = ['https://dream-vacation-production.up.railway.app']
