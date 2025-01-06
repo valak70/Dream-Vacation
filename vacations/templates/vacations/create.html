@@ -1,0 +1,42 @@
+{% extends 'vacations/base.html' %}
+{% block title %}Create Dream Vacation{% endblock %}
+{% block content %}
+<div class="create-container">
+    <div class="create-vacation-container">
+        <h1 class="create-vacation-heading">Create a Dream Vacation</h1>
+        <form method="post" enctype="multipart/form-data" class="create-vacation-form">
+            {% csrf_token %}
+            <div>
+                <!-- Title Field -->
+                <label for="id_title">Title</label>
+                <input type="text" name="title" id="id_title" placeholder="E.g., A Tropical Paradise in Bali" required>
+            </div>
+            <div>
+                <!-- Description Field -->
+                <label for="id_description">Description</label>
+                <textarea name="description" id="id_description" placeholder="E.g., Spend your days on the sandy beaches of Bali..." required></textarea>
+            </div>
+            <div>
+                <!-- Category Field -->
+                <label for="id_category">Category</label>
+                <select name="category" id="id_category" required>
+                    <option value="" disabled selected>Select a category</option>
+                    <option value="Beach">Beach</option>
+                    <option value="Hiking">Hiking</option>
+                    <option value="Cottage">Cottage</option>
+                    <option value="Cruise">Cruise</option>
+                    <option value="Others">Others</option>
+                </select>
+            </div>
+            <div>
+                <!-- Image Field -->
+                <label for="id_image">Image</label>
+                <input type="file" name="image" id="id_image" required>
+            </div>
+            <button type="submit" class="create-vacation-submit">Create</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+

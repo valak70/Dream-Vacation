@@ -1,0 +1,526 @@
+/* Reset and general styles */
+* {
+    box-sizing: border-box;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins',Arial, sans-serif;
+    background-color: #e1faf7;
+    color: #333;
+    display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+    
+}
+
+main {
+    flex: 1; /* Takes up available space */
+}
+/* Header branding */
+.branding {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.branding a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+}
+
+.branding a:hover {
+    cursor: pointer; /* Show pointer on hover */
+}
+
+.branding span {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.auth-links a, .auth-links button {
+    margin-left: 15px;
+    color: #fff;
+    text-decoration: none;
+    background-color: #4CAF50;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.auth-links a:hover, .auth-links button:hover {
+    background-color: #45a049;
+}
+
+/* Main navigation */
+
+.main-nav {
+    background-color: #e6eef2;
+    width: 30%;
+    padding: 10px 20px;
+    text-align: center;
+    justify-self: center;
+    border-radius: 5px;
+}
+
+.main-nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-nav a:hover {
+    background-color: #4CAF50;
+    color: #fff;
+}
+.main-nav .search-form {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.main-nav .search-form input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.main-nav .search-form button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.main-nav .search-form button:hover {
+    background-color: #45a049;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.create-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensures full height of the viewport */
+    flex: 1;
+}
+
+/* Container for the form */
+.create-vacation-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    width: 400px;
+    text-align: center;
+}
+
+/* Heading styling */
+.create-vacation-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form styling */
+.create-vacation-form input[type="text"],
+.create-vacation-form input[type="file"],
+.create-vacation-form select,
+.create-vacation-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* Submit button styling */
+.create-vacation-submit {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.create-vacation-submit:hover {
+    background-color: #45a049;
+}
+.header-container {
+    text-align: left;
+}
+
+.header-container h1 {
+    margin-left: 8%;
+    margin-top: 35px;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333; /* Adjust the color as needed */
+    /* background-color: rgba(255, 255, 255, 0.8); Light background for readability */
+    padding: 10px 20px;
+    border-radius: 10px; /* Rounded edges for the rectangle */
+    display: inline-block;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); Optional shadow for depth */
+}
+
+/* Add shadow for the form */
+/* .create-vacation-form {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+} */
+/* Top Vacation Section */
+.top-vacation-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 40px 40px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.top-vacation-image {
+    flex: 1;
+    max-width: 50%;
+    margin-right: 15px;
+}
+
+.top-vacation-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover; /* Ensures proper image resizing */
+    max-height: 300px; /* Sets a height limit */
+}
+
+.top-vacation-details {
+    flex: 1;
+    max-width: 50%;
+}
+
+.top-vacation-details h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.top-vacation-details p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.top-vacation-details a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.top-vacation-details a:hover {
+    background-color: #0056b3;
+}
+
+/* Category Section */
+.category-section {
+    padding: 20px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.category-section h2 {
+    margin-bottom: 20px;
+}
+
+/* Ensures categories appear in one row */
+.category-container {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+}
+
+.category-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for better UI */
+}
+
+
+.vacation-card {
+    min-width: 200px;
+    max-width: 200px; /* Fix the card size */
+    flex: 0 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.vacation-card img {
+    width: 100%;
+    height: 120px; /* Enforce fixed height */
+    border-radius: 8px;
+    margin-bottom: 10px;
+    object-fit: cover; /* Ensure proper scaling */
+}
+
+.vacation-card h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+
+.scroll-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.scroll-buttons button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+}
+
+.scroll-buttons button:hover {
+    transform: scale(1.05);
+}
+
+.category-title-link {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem; /* Base size */
+    font-weight: 500; /* Slightly bold */
+    color: #5a5a5a; /* Grayish color */
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none; /* No underline */
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
+
+.category-title-link:hover {
+    font-size: 1.3rem; /* Slight enlargement */
+    font-weight: 600; /* Bold on hover */
+    color: #3a3a3a; /* Darker gray on hover */
+}
+
+/* Vacation Card Styling */
+.vacation-card {
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    transition: transform 0.3s ease; /* Hover effect for card */
+}
+
+.vacation-card:hover {
+    transform: scale(1.05); /* Slight enlargement on hover */
+}
+
+/* Image Styling */
+.vacation-card img {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px; /* Matches the card's rounded corners */
+}
+
+/* Scroll Button Styling */
+.scroll-buttons button {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+.scroll-buttons button:hover {
+    color: #0056b3;
+}
+.top-vacation-image img {
+  transition: transform 0.3s ease;
+}
+.top-vacation-image img:hover {
+  transform: scale(1.05);
+}
+
+.vacation-detail-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px 40px;
+    max-width: 1200px;
+    margin: 30px auto;
+    /* background-color: #f0f9ff; */
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+}
+
+.vacation-detail-image {
+    flex: 1;
+    max-width: 50%;
+}
+
+.vacation-detail-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    max-height: 300px;
+}
+
+.vacation-detail-content {
+    flex: 1;
+    max-width: 50%;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.vacation-detail-content h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.vacation-detail-content p {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#comment-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#comment-form textarea {
+    width: 100%;
+    max-width: 600px;
+    height: 80px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    resize: none;
+    font-size: 16px;
+}
+
+#comment-form textarea::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+#comment-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#comment-form button:hover {
+    background-color: #0056b3;
+}
+
+#comments-section {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.comment {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment:last-child {
+    border-bottom: none;
+}
+
+.comment-username {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-text {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upvote-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: #333;
+}
+
+.upvote-btn.upvoted {
+    color: #ff4500;
+}
+
+.upvote-count {
+    font-size: 16px;
+}
+
+

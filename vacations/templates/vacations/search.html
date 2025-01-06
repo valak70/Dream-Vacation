@@ -1,0 +1,39 @@
+{% extends 'vacations/base.html' %}
+{% block content %}
+<div style="padding: 20px;">
+    <h2 style="text-align: center; margin-bottom: 20px;">Search Results</h2>
+
+    {% if results %}
+        <!-- Display search query -->
+        <p style="text-align: center; font-size: 1rem; color: #555;">
+            Showing results for: <strong>{{ query }}</strong>
+        </p>
+
+        <!-- Display results -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin-top: 20px;">
+            {% for vacation in results %}
+                <div style="width: 90%; max-width: 600px; border-radius: 20px; border: 2px solid #ddd; padding: 20px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.2s;">
+                    <a href="{% url 'vacation_detail' vacation.id %}" 
+                       style="text-decoration: none; color: inherit;">
+                        <h3 style="margin-bottom: 10px; font-size: 1.5rem; transition: transform 0.2s; cursor: pointer;">
+                            {{ vacation.title }}
+                        </h3>
+                    </a>
+                    <p style="margin-bottom: 20px; color: #555;">{{ vacation.description|truncatechars:50 }}</p>
+                    <img src="{{ vacation.image.url }}" alt="{{ vacation.title }}" 
+                         style="width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px;">
+                    <a href="{% url 'vacation_detail' vacation.id %}" 
+                       style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">View Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- No results message -->
+        <p style="text-align: center; font-size: 1rem; color: #555;">
+            No results found for "<strong>{{ query }}</strong>".
+        </p>
+    {% endif %}
+</div>
+{% endblock %}
+
+

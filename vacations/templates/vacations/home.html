@@ -1,0 +1,44 @@
+{% extends 'vacations/base.html' %}
+{% block content %}
+<div class="header-container">
+        <h1>Find Your Dream Vacation</h1>
+    </div>
+
+<!-- Top Vacation Section -->
+<section class="top-vacation-section">
+    
+    {% if top_vacation %}
+        <div class="top-vacation-image">
+            <img src="{{ top_vacation.image.url }}" alt="{{ top_vacation.title }}">
+        </div>
+        <div class="top-vacation-details">
+            <h3>{{ top_vacation.title }}, {{ top_vacation.category }}</h3>
+            <p>{{ top_vacation.description }}</p>
+            <a href="{% url 'vacation_detail' top_vacation.id %}">View Details</a>
+        </div>
+    {% else %}
+        <p>No vacations to display.</p>
+    {% endif %}
+</section>
+
+<!-- Categories Section -->
+<section>
+    <div class="category-section">
+        <h2>Categories</h2>
+        <div class="scroll-buttons">
+            <button onclick="scrollToLeft()">&#8249;</button>
+            <div class="category-container">
+                {% for category, vacations in category_vacations.items %}
+                    <div class="vacation-card">
+                        <img src="{{ vacations.0.image.url }}" alt="{{ vacations.0.title }}">
+                        <a class="category-title-link" href="{% url 'category_view' category %}">
+                            {{ category }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <button onclick="scrollToRight()">&#8250;</button>
+        </div>
+    </div>
+</section>
+{% endblock %}
