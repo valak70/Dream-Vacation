@@ -50,6 +50,7 @@ The **Dream Vacation App** is a web application where users can create, share, a
 1. Python 3.9+
 2. Virtual environment (optional but recommended)
 3. Django 5.1.4
+4. Railway CLI (for deployment)
 
 ### Steps
 
@@ -59,19 +60,65 @@ The **Dream Vacation App** is a web application where users can create, share, a
    cd dream-vacation
    ```
 
-2. Apply migrations:
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. Install required packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Apply migrations:
    ```bash
    python manage.py makemigrations
    python manage.py migrate
    ```
-3. Run the development server:
+
+5. Collect static files:
+   ```bash
+   python manage.py collectstatic
+   ```
+
+6. Test the application locally:
    ```bash
    python manage.py runserver
    ```
 
-4. Open the application in your browser:
-   ```bash
+7. Open the application in your browser:
+   ```
    http://127.0.0.1:8000
+   ```
+
+### Deployment
+
+1. Login to Railway and create a new project:
+   ```bash
+   railway login
+   railway init
+   ```
+
+2. Add environment variables in Railway:
+   - `DEBUG=False`
+   - `SECRET_KEY=<your-secret-key>`
+   - `ALLOWED_HOSTS=dream-vacation-production.up.railway.app`
+
+3. Configure the database:
+   ```bash
+   railway run python manage.py migrate
+   ```
+
+4. Deploy the application:
+   ```bash
+   railway up
+   ```
+
+5. Access the live application at:
+   ```
+   https://dream-vacation-production.up.railway.app
+   ```
 
 ---
 
@@ -108,16 +155,12 @@ The **Dream Vacation App** is a web application where users can create, share, a
 
 ---
 
-## License
-
-This project is licensed under the MIT License. Feel free to use and modify it as needed.
-
----
-
 ## Screenshots
 ![image](https://github.com/user-attachments/assets/dd6d154d-96b0-4f3b-88ee-ddf7346232fd)
 ![image](https://github.com/user-attachments/assets/9e1db226-8d53-4d3e-82b0-ff99748fcb17)
 ![image](https://github.com/user-attachments/assets/38f4a326-d720-4f37-91e7-bb9c66436f9d)
 ![image](https://github.com/user-attachments/assets/ae0429ff-87f0-46fd-b1fc-04ec80ce75c1)
+
+
 
 
