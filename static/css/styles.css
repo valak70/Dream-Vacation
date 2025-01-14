@@ -60,15 +60,46 @@ main {
 
 .main-nav {
     background-color: #e6eef2;
-    width: 30%;
+    width: 40%;
     padding: 10px 20px;
     text-align: center;
     justify-self: center;
     border-radius: 5px;
 }
 
+.dark-mode-logo{
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    padding: 5px;
+    margin-left: 33px;
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-text {
+    width: 180px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(15%, 0%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding:5px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.image-container:hover .hover-text {
+    opacity: 1;
+}
+
 .main-nav a {
-    margin: 0 15px;
+    margin: 0 25px;
     text-decoration: none;
     color: #333;
     font-weight: bold;
@@ -105,6 +136,67 @@ main {
     background-color: #45a049;
 }
 
+
+
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e1e1e1;
+}
+
+.dark-mode .branding {
+    background-color: #1f1f1f;
+    color: #e1e1e1;
+}
+
+.dark-mode .auth-links a, 
+.dark-mode .auth-links button {
+    background-color: #555;
+    color: #e1e1e1;
+}
+
+.dark-mode .auth-links a:hover, 
+.dark-mode .auth-links button:hover {
+    background-color: #444;
+}
+
+.dark-mode .main-nav {
+    background-color: #333;
+    color: #e1e1e1;
+}
+
+.dark-mode .main-nav a {
+    color: #e1e1e1;
+}
+
+.dark-mode .main-nav a:hover {
+    background-color: #555;
+    color: #e1e1e1;
+}
+
+.dark-mode .main-nav .search-form input {
+    background-color: #555;
+    color: #e1e1e1;
+    border: 1px solid #444;
+}
+
+.dark-mode .main-nav .search-form button {
+    background-color: #555;
+    color: #e1e1e1;
+}
+
+.dark-mode .main-nav .search-form button:hover {
+    background-color: #444;
+}
+
+.dark-mode .hover-text {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+
+
 /* Footer */
 footer {
     background-color: #333;
@@ -125,6 +217,14 @@ footer {
     flex: 1;
 }
 
+.dark-mode .create-vacation-container{
+    background-color: #333;
+    color: #e1e1e1;
+}
+
+.dark-mode .create-vacation-heading{
+    color: #e1e1e1;
+}
 /* Container for the form */
 .create-vacation-container {
     background-color: #ffffff;
@@ -156,6 +256,13 @@ footer {
     box-sizing: border-box;
 }
 
+.dark-mode .create-vacation-submit{
+    background-color: #007bff;
+    color: #fff;
+}
+.dark-mode .create-vacation-submit:hover{
+    background-color: #0056b3;
+}
 /* Submit button styling */
 .create-vacation-submit {
     background-color: #4CAF50;
@@ -176,18 +283,65 @@ footer {
 .header-container {
     text-align: left;
 }
-
+/* 
 .header-container h1 {
     margin-left: 8%;
     margin-top: 35px;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #333; /* Adjust the color as needed */
-    /* background-color: rgba(255, 255, 255, 0.8); Light background for readability */
+    color: #333; 
+    background-color: rgba(255, 255, 255, 0.8); 
     padding: 10px 20px;
-    border-radius: 10px; /* Rounded edges for the rectangle */
+    border-radius: 10px; 
     display: inline-block;
-    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); Optional shadow for depth */
+} */
+/* Overall header container */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Push elements to the edges */
+    align-items: center; /* Center align items vertically */
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: 35px;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.dark-mode .header-title {
+    color: #e1e1e1;
+}
+/* Header text */
+.header-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333; /* Darker color for contrast */
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#search-bar {
+    width: 300px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+#search-bar:focus {
+    border-color: #6abf4b; /* Highlight color */
+    box-shadow: 0 0 8px rgba(106, 191, 75, 0.4);
+}
+
+.search-icon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 /* Add shadow for the form */
@@ -400,6 +554,10 @@ footer {
 }
 
 .vacation-detail-image {
+    position: relative; /* Ensures the icon is positioned relative to this container */
+    display: inline-block; /* Keeps the image and icon together */ /* Adjust to fit your layout */
+    border-radius: 8px; /* Optional: Add rounded corners to the image */
+    overflow: hidden; /* Ensures the icon stays inside the container */
     flex: 1;
     max-width: 50%;
 }
@@ -521,6 +679,285 @@ footer {
 
 .upvote-count {
     font-size: 16px;
+}
+
+
+
+.favorite-icon {
+    position: absolute;
+    top: 10px; /* Adjust spacing from the top */
+    right: 10px; /* Adjust spacing from the right */
+    cursor: pointer;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background */
+    padding: 8px; /* Add padding around the icon */
+    border-radius: 50%; /* Make the background circular */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow for depth */
+    transition: transform 0.2s, background-color 0.2s; /* Smooth transition effects */
+}
+
+/* Hover effect for favorite icon */
+.favorite-icon:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+    background-color: rgba(255, 255, 255, 1); /* Fully opaque background on hover */
+}
+
+/* Icon image styling */
+.favorite-icon img {
+    width: 20px; /* Adjust the size of the favorite icon */
+    height: 20px;
+    display: block; /* Ensures the image stays centered inside the background */
+}
+
+.confirmation-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.popup-content p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+.popup-content .confirm-btn,
+.popup-content .cancel-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.popup-content .confirm-btn {
+    background: #28a745;
+    color: white;
+}
+
+.popup-content .cancel-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropdown-toggle {
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+    background-color: #f7f7f7;
+    border-radius: 4px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    min-width: 150px;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.dropdown-menu li {
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f7f7f7;
+}
+
+.dark-mode .dropdown-menu a{
+    color: #121212;
+}
+
+.dropdown-menu a {
+    text-decoration: none;
+    color: #333;
+    display: block; /* Make the entire area clickable */
+    font-weight: 500;
+}
+
+.vcs-search-results, .vcs-results-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.vcs-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.vcs-query, .vcs-no-results {
+    text-align: center;
+    font-size: 1rem;
+    color: #555;
+}
+
+.vcs-card {
+    width: 90%;
+    max-width: 600px;
+    border-radius: 20px;
+    border: 2px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.vcs-card:hover {
+    transform: scale(1.03);
+}
+
+.vcs-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.vcs-card-title {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.vcs-card-description {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.vcs-card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.vcs-card-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.vcs-card-button:hover {
+    background-color: #0056b3;
+}
+
+.user-menu {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.user-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.username {
+    font-weight: 600;
+}
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    width: 200px;
+    z-index: 1000;
+}
+
+.user-menu:hover .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logout-form {
+    display: inline; /* Ensure the logout form appears inline */
+}
+
+.dropdown li {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: start; /* Ensure alignment starts from the left */
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #f7f7f7;
+}
+
+.dropdown a,
+.dropdown button {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Take the remaining space */
+    text-decoration: none; /* Remove underline for links */
+    color: #333;
+    font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
 }
 
 

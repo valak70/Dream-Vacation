@@ -39,30 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// document.addEventListener('click', function (event) {
-//     if (event.target.matches('.upvote-btn')) {
-//         const button = event.target;
-//         const commentId = button.getAttribute('data-id');
-//         const upvoteCountElem = document.getElementById(`upvote-count-${commentId}`);
-
-//         // Toggle the upvoted class to change the button state
-//         button.classList.toggle('upvoted');
-
-//         // Simulate the upvote count change (you would replace this with an AJAX call)
-//         let currentCount = parseInt(upvoteCountElem.textContent, 10);
-//         if (button.classList.contains('upvoted')) {
-//             currentCount++;
-//         } else {
-//             currentCount--;
-//         }
-//         upvoteCountElem.textContent = currentCount;
-        
-//         // Prevent default button action
-//         event.preventDefault();
-//     }
-// });
-
-
 
 document.getElementById('comment-form').addEventListener('submit', function (e) {
     e.preventDefault(); // Prevent the form from submitting the traditional way
@@ -110,3 +86,49 @@ function scrollToRight() {
     const container = document.querySelector('.category-container');
     container.scrollLeft += 300; // Adjust the scroll amount as needed
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const favoriteIcon = document.querySelector('.favorite-icon');
+    const popup = document.getElementById('favorite-popup');
+    const confirmBtn = document.getElementById('confirm-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    // Show popup on clicking the favorite icon
+    favoriteIcon.addEventListener('click', () => {
+        popup.classList.remove('hidden');
+    });
+
+    // Handle confirm button
+    confirmBtn.addEventListener('click', () => {
+        const vacationId = favoriteIcon.dataset.id;
+
+        // Send AJAX request to add to favorites
+        fetch(`/toggle-favorite/${vacationId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'added') {
+                favoriteIcon.querySelector('img').src = '/favorited.png';
+                alert('Added to favorites!');
+            } else if (data.status === 'removed') {
+                favoriteIcon.querySelector('img').src = '/favorite.png';
+                alert('Removed from favorites!');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+
+        // Close the popup
+        popup.classList.add('hidden');
+    });
+
+    // Handle cancel button
+    cancelBtn.addEventListener('click', () => {
+        popup.classList.add('hidden');
+    });
+});
+
+

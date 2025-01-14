@@ -1,12 +1,20 @@
 {% extends 'vacations/base.html' %}
+{% load static %}
 {% block content %}
 <div class="header-container">
-        <h1>Find Your Dream Vacation</h1>
+    <h1 class="header-title">Find Your Dream Vacation</h1>
+    <div class="search-container">
+        <input
+            type="text"
+            id="search-bar"
+            placeholder="Search vacations by title..."
+        />
+        <img src="{% static 'search.png' %}" alt="Search Icon" class="search-icon" />
     </div>
+</div>
 
 <!-- Top Vacation Section -->
-<section class="top-vacation-section">
-    
+<section class="top-vacation-section" id="home-content">
     {% if top_vacation %}
         <div class="top-vacation-image">
             <img src="{{ top_vacation.image.url }}" alt="{{ top_vacation.title }}">
@@ -22,7 +30,7 @@
 </section>
 
 <!-- Categories Section -->
-<section>
+<section id="home-categories">
     <div class="category-section">
         <h2>Categories</h2>
         <div class="scroll-buttons">
@@ -41,4 +49,79 @@
         </div>
     </div>
 </section>
+
+<!-- Search Results Section -->
+<div class="vcs-search-results" id="search-results" style="display: none;">
+    <h2 class="vcs-title">Search Results</h2>
+    <p class="vcs-query" id="query-display"></p>
+    <div class="vcs-results-container" id="results-container"></div>
+    <p class="vcs-no-results" id="no-results" style="display: none;">No results found.</p>
+</div>
+
+<script>
+    let debounceTimeout;
+
+    // Debounce function
+    function debounce(func, delay) {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(func, delay);
+    }
+
+    // Function to handle search
+    function performSearch(query) {
+        const homeContent = document.getElementById('home-content');
+        const homeCategories = document.getElementById('home-categories');
+        const searchResults = document.getElementById('search-results');
+        const resultsContainer = document.getElementById('results-container');
+        const queryDisplay = document.getElementById('query-display');
+        const noResults = document.getElementById('no-results');
+
+        if (query.trim() === '') {
+            // Show home page content if search is cleared
+            homeContent.style.display = 'flex';
+            homeCategories.style.display = 'block';
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        fetch(`/dynamic-search/?q=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                resultsContainer.innerHTML = '';
+                queryDisplay.textContent = `Showing results for: "${query}"`;
+                noResults.style.display = 'none';
+
+                if (data.results.length > 0) {
+                    data.results.forEach(result => {
+                        const card = document.createElement('div');
+                        card.classList.add('vcs-card');
+                        card.innerHTML = `
+                            <a href="/vacation/${result.id}" class="vcs-card-link">
+                                <h3 class="vcs-card-title">${result.title}</h3>
+                            </a>
+                            <p class="vcs-card-description">${result.description}</p>
+                            <img src="${result.image_url}" alt="${result.title}" class="vcs-card-image">
+                            <a href="/vacation/${result.id}" class="vcs-card-button">View Details</a>
+                        `;
+                        resultsContainer.appendChild(card);
+                    });
+                } else {
+                    noResults.style.display = 'block';
+                }
+                
+
+                // Show search results and hide home page content
+                homeContent.style.display = 'none';
+                homeCategories.style.display = 'none';
+                searchResults.style.display = 'block';
+            })
+            .catch(error => console.error('Error fetching search results:', error));
+    }
+
+    // Event listener for search input
+    document.getElementById('search-bar').addEventListener('input', (event) => {
+        const query = event.target.value.trim();
+        debounce(() => performSearch(query), 300); // 300ms debounce
+    });
+</script>
 {% endblock %}

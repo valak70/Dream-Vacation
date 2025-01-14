@@ -524,3 +524,146 @@ footer {
 }
 
 
+/* Popup overlay */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Hidden by default */
+.popup.hidden {
+    display: none;
+}
+
+/* Popup content */
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+/* Buttons */
+.popup-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#confirm-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+#cancel-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+.user-menu {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.user-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: 600;
+}
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Hidden by default */
+    width: 200px;
+    z-index: 1000;
+}
+
+.user-menu:hover .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.logout-form {
+    display: inline; /* Ensure the logout form appears inline */
+}
+
+.dropdown li {
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: start; /* Ensure alignment starts from the left */
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.dropdown li:hover {
+    background-color: #f7f7f7;
+}
+
+.dropdown a,
+.dropdown button {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Take the remaining space */
+    text-decoration: none; /* Remove underline for links */
+    color: #333;
+    font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+

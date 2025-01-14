@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="branding">
-            <span>Dream Vacations</span>
+            <span onclick="redirectToHome()" style="cursor: pointer;">Dream Vacations</span>
             <div class="auth-links">
                 {% if user.is_authenticated %}
                 <form action="{% url 'logout' %}" method="post">
@@ -34,6 +34,11 @@
         </form>
     </main>
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        function redirectToHome() {
+            window.location.href = "{% url 'home' %}";
+        }
+    </script>
 </body>
 
 </html>

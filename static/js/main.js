@@ -39,30 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// document.addEventListener('click', function (event) {
-//     if (event.target.matches('.upvote-btn')) {
-//         const button = event.target;
-//         const commentId = button.getAttribute('data-id');
-//         const upvoteCountElem = document.getElementById(`upvote-count-${commentId}`);
-
-//         // Toggle the upvoted class to change the button state
-//         button.classList.toggle('upvoted');
-
-//         // Simulate the upvote count change (you would replace this with an AJAX call)
-//         let currentCount = parseInt(upvoteCountElem.textContent, 10);
-//         if (button.classList.contains('upvoted')) {
-//             currentCount++;
-//         } else {
-//             currentCount--;
-//         }
-//         upvoteCountElem.textContent = currentCount;
-        
-//         // Prevent default button action
-//         event.preventDefault();
-//     }
-// });
-
-
 
 document.getElementById('comment-form').addEventListener('submit', function (e) {
     e.preventDefault(); // Prevent the form from submitting the traditional way
@@ -110,3 +86,69 @@ function scrollToRight() {
     const container = document.querySelector('.category-container');
     container.scrollLeft += 300; // Adjust the scroll amount as needed
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const favoriteIcons = document.querySelectorAll(".favorite-icon");
+
+    favoriteIcons.forEach((icon) => {
+        icon.addEventListener("click", function () {
+            const isFavorited = icon.dataset.favorited === "true"; // Check current state
+            const vacationId = icon.dataset.id; // Vacation ID
+            const action = isFavorited ? "Remove from Favorites" : "Add to Favorites";
+
+            // Create and show the confirmation popup
+            const popup = document.createElement("div");
+            popup.className = "confirmation-popup";
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <p>Are you sure you want to ${action}?</p>
+                    <button class="confirm-btn">Confirm</button>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+
+            // Handle confirmation
+            popup.querySelector(".confirm-btn").addEventListener("click", function () {
+                toggleFavorite(vacationId, !isFavorited, icon);
+                document.body.removeChild(popup); // Close popup
+            });
+
+            // Handle cancellation
+            popup.querySelector(".cancel-btn").addEventListener("click", function () {
+                document.body.removeChild(popup); // Close popup
+            });
+        });
+    });
+});
+
+// Function to toggle favorite status
+function toggleFavorite(vacationId, isFavorited, icon) {
+    fetch(`/toggle-favorite/${vacationId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": getCSRFToken(), // Include CSRF token
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ favorited: isFavorited }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                // Update the icon state
+                icon.dataset.favorited = isFavorited ? "true" : "false";
+                icon.querySelector("img").src = isFavorited
+                    ? "/static/favourited.png"
+                    : "/static/favourite.png";
+            } else {
+                alert("Failed to update favorite status. Please try again.");
+            }
+        });
+}
+
+// Function to get CSRF token (helper)
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+

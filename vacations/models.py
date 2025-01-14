@@ -32,3 +32,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.user.username} on {self.vacation.title}'
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    favorites = models.ManyToManyField(DreamVacation, related_name='favorited_by', blank=True)
+    theme_preference = models.CharField(max_length=10, choices=[('light', 'Light'), ('dark', 'Dark')], default='light')
+
+    def __str__(self):
+        return self.user.username

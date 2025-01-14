@@ -6,31 +6,70 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="{{ user.profile.theme_preference }}-mode">
     <header>
         <div class="branding">
             <a href="{% url 'home' %}">
                 <span>Dream Vacations</span>
             </a>
-            <div class="auth-links">
+            <div>
                 {% if user.is_authenticated %}
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Logout ({{ user.username }})</button>
-                    </form>
+                <div class="user-menu" id="user-menu">
+                    <img src="{% static 'user.png' %}" alt="User Logo" class="user-logo">
+                    <span class="username">{{ user.username }}</span>
+                    <div class="dropdown" id="dropdown-menu">
+                        <ul>
+                            <li onclick="redirectToFavorites()">
+                                <a class="dropdown-link">
+                                    <img src="{% static 'favourite.png' %}" alt="Favorites Icon" class="menu-icon">
+                                    Favorites
+                                </a>
+                            </li>
+                            <li onclick="logoutUser()">
+                                <a class="dropdown-link">
+                                    <img src="{% static 'logout.png' %}" alt="Logout Icon" class="menu-icon">
+                                    Log out
+                                </a>
+                            </li>
+                            
+                            <form id="logoutForm" action="{% url 'logout' %}" method="post" style="display: none;">
+                                {% csrf_token %}
+                            </form>
+                        </ul>
+                    </div>
+                </div>
+                
                 {% else %}
+                <div class="auth-links">
+                
                     <a href="{% url 'login' %}">Login</a>
                     <a href="{% url 'register' %}">Register</a>
+                
+                </div>
                 {% endif %}
             </div>
         </div>
         <nav class="main-nav">
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'create_vacation' %}">Create</a>
-            <form action="{% url 'search' %}" method="get" class="search-form">
-                <input type="text" name="q" placeholder="Search..." required>
-                <button type="submit">Search</button>
-            </form>
+        
+            <!-- Category Dropdown -->
+            <div class="nav-dropdown" id="category-dropdown">
+                <a class="dropdown-toggle">Categories</a>
+                <div class="dropdown-menu" id="category-menu">
+                    <ul>
+                        <li><a href="{% url 'category_view' 'Beach' %}">Beach</a></li>
+                        <li><a href="{% url 'category_view' 'Hiking' %}">Hiking</a></li>
+                        <li><a href="{% url 'category_view' 'Cruise' %}">Cruise</a></li>
+                        <li><a href="{% url 'category_view' 'Cottage' %}">Cottage</a></li>
+                        <li><a href="{% url 'category_view' 'Others' %}">Others</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="image-container" id="theme-toggle">
+                <img class = "dark-mode-logo" src="{% static 'night-mode.png'%}" alt="Dark Mode Icon">
+                <div class="hover-text">Toggle Dark Mode</div>
+            </div>
         </nav>
     </header>   
     <main>
@@ -41,6 +80,85 @@
         <p>&copy; 2025 Dream Vacation App</p>
     </footer>
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        // Dropdown toggle functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const userMenu = document.getElementById('user-menu');
+            const dropdown = document.getElementById('dropdown-menu');
+        
+            // Toggle dropdown when user menu is clicked
+            userMenu.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent body click from closing dropdown immediately
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+        
+            // Close dropdown when clicking outside
+            document.body.addEventListener('click', () => {
+                dropdown.style.display = 'none';
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryDropdown = document.getElementById('category-dropdown');
+            const categoryMenu = document.getElementById('category-menu');
+    
+            // Toggle category dropdown menu
+            categoryDropdown.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent body click from closing the menu immediately
+                categoryMenu.style.display = categoryMenu.style.display === 'block' ? 'none' : 'block';
+            });
+    
+            // Close the dropdown when clicking outside
+            document.body.addEventListener('click', () => {
+                categoryMenu.style.display = 'none';
+            });
+        });
+        function redirectToFavorites() {
+            window.location.href = "{% url 'favorites' %}";
+        }
+        function logoutUser() {
+            document.getElementById('logoutForm').submit();
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleButton = document.getElementById("theme-toggle");
+            const body = document.body;
+        
+            // Function to check user login status via backend
+            fetch('/check-logged-in/')
+                .then(res => res.json())
+                .then(data => {
+                    const userLoggedIn = data.isLoggedIn;
+        
+                    // Load theme based on login status
+                    if (userLoggedIn) {
+                        fetch('/get-user-theme')
+                            .then(res => res.json())
+                            .then(data => body.className = (data.theme || 'light') + '-mode')
+                            .catch(() => body.className = 'light-mode'); // Fallback
+                    } else {
+                        const savedTheme = localStorage.getItem('theme') || 'light';
+                        body.className = savedTheme + '-mode';
+                    }
+        
+                    // Toggle theme
+                    toggleButton.addEventListener("click", function () {
+                        const currentTheme = body.classList.contains("dark-mode") ? "light" : "dark";
+                        body.className = currentTheme + '-mode';
+        
+                        if (userLoggedIn) {
+                            // Save user theme preference in the backend
+                            fetch(`/toggle-theme/?theme=${currentTheme}`);
+                        } 
+                            localStorage.setItem('theme', currentTheme);
+                    });
+                })
+                .catch(() => {
+                    // If the check fails, fallback to non-logged-in behavior
+                    const savedTheme = localStorage.getItem('theme') || 'light';
+                    body.className = savedTheme + '-mode';
+                });
+        });
+        
+    </script>
 </body>
 </html>
 

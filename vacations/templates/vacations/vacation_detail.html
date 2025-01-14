@@ -1,14 +1,22 @@
 {% extends 'vacations/base.html' %}
+{% load static %}
 {% block title %}{{ vacation.title }}{% endblock %}
 {% block content %}
 <div class="vacation-detail-section">
     <div class="vacation-detail-image">
         <img src="{{ vacation.image.url }}" alt="{{ vacation.title }}">
-    </div>
+        <div 
+            class="favorite-icon" 
+            data-id="{{ vacation.id }}" 
+            data-favorited="{% if vacation in user.profile.favorites.all %}true{% else %}false{% endif %}">
+            <img 
+                src="{% static '' %}{% if vacation in user.profile.favorites.all %}favourited.png{% else %}favourite.png{% endif %}" 
+                alt="Favorite icon">
+        </div>
+    </div>           
     <div class="vacation-detail-content">
-        <h1>{{ vacation.title }}</h1>
+        <h1>{{ vacation.title }}, {{ vacation.category }}</h1>
         <p>{{ vacation.description }}</p>
-        <p>Category: {{ vacation.category }}</p>
     </div>
 </div>
 

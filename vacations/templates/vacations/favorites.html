@@ -1,0 +1,22 @@
+{% extends 'vacations/base.html' %}
+{% block title %}My Favorites{% endblock %}
+{% block content %}
+<h1 class="vcs-title">My Favorite Vacations</h1>
+
+<div class="vcs-results-container">
+    {% if vacations %}
+        {% for vacation in vacations %}
+            <div class="vcs-card">
+                <a href="{% url 'vacation_detail' vacation.id %}" class="vcs-card-link">
+                    <h3 class="vcs-card-title">{{ vacation.title }}</h3>
+                </a>
+                <p class="vcs-card-description">{{ vacation.description|truncatechars:50 }}</p>
+                <img src="{{ vacation.image.url }}" alt="{{ vacation.title }}" class="vcs-card-image">
+                <a href="{% url 'vacation_detail' vacation.id %}" class="vcs-card-button">View Details</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="vcs-no-results">You have not marked any vacations as favorites yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
