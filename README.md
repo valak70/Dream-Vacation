@@ -13,6 +13,8 @@ The **Dream Vacation App** is a web application where users can create, share, a
 2. **Search Functionality**
    - Users can search for vacations by title.
    - Results are displayed dynamically, with a message when no results are found.
+   - Includes a debounce function to delay search execution and optimize performance.
+   - Displays search results dynamically without page reload.
 
 3. **Create Dream Vacation**
    - Users can add new vacations by providing details such as title, description, category, and an image.
@@ -26,6 +28,21 @@ The **Dream Vacation App** is a web application where users can create, share, a
 
 6. **Authentication**
    - Users are redirected to the home page upon successful login.
+
+7. **Popup for Adding to Favorites**
+   - Users can mark a dream vacation as a favorite through a visually engaging popup.
+   - The popup includes a confirmation message and two buttons: "Confirm" and "Cancel."
+   - The popup closes dynamically upon user interaction.
+
+8. **Dark and Light Mode**
+   - Users can toggle between dark and light themes for better usability.
+   - A toggle button is available in the navbar for switching modes.
+   - User preferences are saved and persist across sessions.
+
+9. **Dropdown in Navbar**
+   - Enhances navigation with an intuitive dropdown menu.
+   - A dropdown is available under the "Categories" link in the navbar.
+   - Ensures the dropdown is accessible and responsive.
 
 ---
 
@@ -50,7 +67,6 @@ The **Dream Vacation App** is a web application where users can create, share, a
 1. Python 3.9+
 2. Virtual environment (optional but recommended)
 3. Django 5.1.4
-4. Railway CLI (for deployment)
 
 ### Steps
 
@@ -92,35 +108,6 @@ The **Dream Vacation App** is a web application where users can create, share, a
    http://127.0.0.1:8000
    ```
 
-### Deployment
-
-1. Login to Railway and create a new project:
-   ```bash
-   railway login
-   railway init
-   ```
-
-2. Add environment variables in Railway:
-   - `DEBUG=False`
-   - `SECRET_KEY=<your-secret-key>`
-   - `ALLOWED_HOSTS=dream-vacation-production.up.railway.app`
-
-3. Configure the database:
-   ```bash
-   railway run python manage.py migrate
-   ```
-
-4. Deploy the application:
-   ```bash
-   railway up
-   ```
-
-5. Access the live application at:
-   ```
-   https://dream-vacation-production.up.railway.app
-   ```
-
----
 
 ## Usage
 
@@ -139,6 +126,15 @@ The **Dream Vacation App** is a web application where users can create, share, a
 5. **Vacation Details**:
    - Click on a vacation to view more details and add comments.
 
+6. **Favorites**:
+   - Mark vacations as favorites using the popup confirmation.
+
+7. **Theme Toggle**:
+   - Switch between dark and light modes using the toggle button in the navbar.
+
+8. **Navigation**:
+   - Use the dropdown menu under "Categories" for easy navigation.
+
 ---
 
 ## Future Enhancements
@@ -153,13 +149,6 @@ The **Dream Vacation App** is a web application where users can create, share, a
 ## Contributors
 - **Aryan Agrahari**: Developer
 
----
-
-## Screenshots
-![image](https://github.com/user-attachments/assets/dd6d154d-96b0-4f3b-88ee-ddf7346232fd)
-![image](https://github.com/user-attachments/assets/9e1db226-8d53-4d3e-82b0-ff99748fcb17)
-![image](https://github.com/user-attachments/assets/38f4a326-d720-4f37-91e7-bb9c66436f9d)
-![image](https://github.com/user-attachments/assets/ae0429ff-87f0-46fd-b1fc-04ec80ce75c1)
 
 
 
